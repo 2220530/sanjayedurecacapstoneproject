@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Course Management System</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <h1>🎓 Student Course Management System</h1>
+      <p class="subtitle">Capstone Project — Edureka Full-Stack Web Development</p>
+    </div>
+  </header>
+
+  <nav>
+    <button class="nav-btn active" data-tab="dashboard">Dashboard</button>
+    <button class="nav-btn" data-tab="students">Students</button>
+    <button class="nav-btn" data-tab="courses">Courses</button>
+    <button class="nav-btn" data-tab="enrollments">Enrollments</button>
+  </nav>
+
+  <main>
+    <!-- Dashboard Tab -->
+    <section id="tab-dashboard" class="tab active">
+      <h2>Dashboard</h2>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <span class="stat-number" id="stat-students">—</span>
+          <span class="stat-label">Total Students</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number" id="stat-courses">—</span>
+          <span class="stat-label">Total Courses</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number" id="stat-enrollments">—</span>
+          <span class="stat-label">Total Enrollments</span>
+        </div>
+      </div>
+
+      <div class="recent-section">
+        <h3>Recent Students</h3>
+        <table id="recent-students-table">
+          <thead><tr><th>Name</th><th>Email</th><th>Phone</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+
+      <div class="recent-section">
+        <h3>Recent Courses</h3>
+        <table id="recent-courses-table">
+          <thead><tr><th>Title</th><th>Instructor</th><th>Duration</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Students Tab -->
+    <section id="tab-students" class="tab">
+      <div class="tab-header">
+        <h2>Students</h2>
+        <button class="btn btn-primary" id="add-student-btn">+ Add Student</button>
+      </div>
+
+      <!-- Add/Edit Form -->
+      <div id="student-form-container" class="form-container hidden">
+        <h3 id="student-form-title">Add Student</h3>
+        <form id="student-form">
+          <input type="hidden" id="student-id" />
+          <div class="form-group">
+            <label for="student-name">Name *</label>
+            <input type="text" id="student-name" placeholder="Full name" required />
+          </div>
+          <div class="form-group">
+            <label for="student-email">Email *</label>
+            <input type="email" id="student-email" placeholder="email@example.com" required />
+          </div>
+          <div class="form-group">
+            <label for="student-phone">Phone</label>
+            <input type="tel" id="student-phone" placeholder="+1 555 000 0000" />
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="button" class="btn btn-secondary" id="cancel-student-btn">Cancel</button>
+          </div>
+        </form>
+      </div>
+
+      <table id="students-table">
+        <thead>
+          <tr>
+            <th>Name</th><th>Email</th><th>Phone</th><th>Enrolled</th><th>Actions</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <!-- Courses Tab -->
+    <section id="tab-courses" class="tab">
+      <div class="tab-header">
+        <h2>Courses</h2>
+        <button class="btn btn-primary" id="add-course-btn">+ Add Course</button>
+      </div>
+
+      <div id="course-form-container" class="form-container hidden">
+        <h3 id="course-form-title">Add Course</h3>
+        <form id="course-form">
+          <input type="hidden" id="course-id" />
+          <div class="form-group">
+            <label for="course-title">Title *</label>
+            <input type="text" id="course-title" placeholder="Course title" required />
+          </div>
+          <div class="form-group">
+            <label for="course-description">Description</label>
+            <textarea id="course-description" placeholder="Course description" rows="3"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="course-instructor">Instructor *</label>
+            <input type="text" id="course-instructor" placeholder="Instructor name" required />
+          </div>
+          <div class="form-group">
+            <label for="course-duration">Duration</label>
+            <input type="text" id="course-duration" placeholder="e.g. 8 weeks" />
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="button" class="btn btn-secondary" id="cancel-course-btn">Cancel</button>
+          </div>
+        </form>
+      </div>
+
+      <table id="courses-table">
+        <thead>
+          <tr>
+            <th>Title</th><th>Instructor</th><th>Duration</th><th>Students</th><th>Actions</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <!-- Enrollments Tab -->
+    <section id="tab-enrollments" class="tab">
+      <div class="tab-header">
+        <h2>Enrollments</h2>
+        <button class="btn btn-primary" id="enroll-btn">+ Enroll Student</button>
+      </div>
+
+      <div id="enrollment-form-container" class="form-container hidden">
+        <h3>Enroll Student in Course</h3>
+        <form id="enrollment-form">
+          <div class="form-group">
+            <label for="enroll-student">Student *</label>
+            <select id="enroll-student" required>
+              <option value="">— Select student —</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="enroll-course">Course *</label>
+            <select id="enroll-course" required>
+              <option value="">— Select course —</option>
+            </select>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Enroll</button>
+            <button type="button" class="btn btn-secondary" id="cancel-enroll-btn">Cancel</button>
+          </div>
+        </form>
+      </div>
+
+      <table id="enrollments-table">
+        <thead>
+          <tr><th>Student</th><th>Course</th><th>Instructor</th><th>Enrolled On</th><th>Actions</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+  </main>
+
+  <!-- Toast notification -->
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
